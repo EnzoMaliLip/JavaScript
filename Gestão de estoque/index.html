@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sistema de Gestão</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro de Funcionários</h1>
+        <form id="form-funcionario">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" id="nome" placeholder="Nome do Funcionário">
+            </div>
+            <div class="form-group">
+                <label for="cargo">Cargo:</label>
+                <input type="text" class="form-control" id="cargo" placeholder="Cargo do Funcionário">
+            </div>
+            <div class="form-group">
+                <label for="id">ID:</label>
+                <input type="number" class="form-control" id="id" placeholder="ID do Funcionário">
+            </div>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+        <div id="lista-funcionarios">
+            <h2>Funcionários Cadastrados</h2>
+            <ul class="list-group"></ul>
+        </div>
+
+        <div id="controle-estoque">
+            <h2>Controle de Estoque</h2>
+            <form id="form-produto">
+                <div class="form-group">
+                    <label for="nome-produto">Nome do Produto:</label>
+                    <input type="text" class="form-control" id="nome-produto" placeholder="Nome do Produto">
+                </div>
+                <div class="form-group">
+                    <label for="quantidade">Quantidade:</label>
+                    <input type="number" class="form-control" id="quantidade" placeholder="Quantidade em Estoque">
+                </div>
+                <div class="form-group">
+                    <label for="preco">Preço:</label>
+                    <input type="number" class="form-control" id="preco" placeholder="Preço do Produto">
+                </div>
+                <button type="submit" class="btn btn-primary">Adicionar Produto</button>
+            </form>
+            <div id="lista-produtos">
+                <h2>Produtos Cadastrados</h2>
+                <ul class="list-group"></ul>
+            </div>
+        </div>
+
+        <div id="registro-vendas">
+            <h2>Registro de Vendas</h2>
+            <form id="form-venda">
+                <div class="form-group">
+                    <label for="funcionario-venda">Funcionário:</label>
+                    <select class="form-control" id="funcionario-venda"></select>
+                </div>
+                <div class="form-group">
+                    <label for="produto-venda">Produto:</label>
+                    <select class="form-control" id="produto-venda"></select>
+                </div>
+                <div class="form-group">
+                    <label for="quantidade-venda">Quantidade:</label>
+                    <input type="number" class="form-control" id="quantidade-venda" placeholder="Quantidade Vendida">
+                </div>
+                <button type="submit" class="btn btn-primary">Registrar Venda</button>
+            </form>
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
