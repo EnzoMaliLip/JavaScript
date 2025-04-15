@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    transition: background-color 0.3s, color 0.3s; /* Transição para o tema */
+}
+
+.dark-theme {
+    background-color: #333;
+    color: #fff;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+/* Remove os estilos padrões da lista */
+ul {
+    list-style: none;
+    padding: 0px;
+}
+
+li {
+    background: #ddd;
+    margin: 5px 0;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Animação */
+}
+
+li:hover {
+    background-color: #ccc; /* Muda a cor ao passar o mouse */
+}
+
+/* Estiliza tarefas concluídas */
+.done {
+    text-decoration: line-through;
+    color: rgb(163, 163, 163);
+}
+
+/* Animação ao adicionar/remover tarefas */
+.task {
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: fadeIn 0.3s forwards; /* Animação de entrada */
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#clearListButton, #toggleTheme {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#clearListButton:hover, #toggleTheme:hover {
+    background-color: #c0392b;
+}
+
+#taskCount {
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #555;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Lista de Tarefas</h2>
+        <input type="text" id="taskInput" placeholder="Nova Tarefa..">
+        <select id="categoryInput">
+            <option value="">Selecione uma categoria</option>
+            <option value="Trabalho">Trabalho</option>
+            <option value="Estudo">Estudo</option>
+            <option value="Casa">Casa</option>
+        </select>
+        <input type="date" id="dueDateInput">
+        <button onclick="addTask()">Adicionar</button>
+        <button id="clearListButton" onclick="clearTasks()">Limpar Lista</button>
+        <button id="filterAll" onclick="filterTasks('all')">Todas</button>
+        <button id="filterPending" onclick="filterTasks('pending')">Pendentes</button>
+        <button id="filterCompleted" onclick="filterTasks('completed')">Concluídas</button>
+        <button id="toggleTheme" onclick="toggleTheme()">Modo Escuro</button>
+        <div id="taskCount">Tarefas: <span id="totalTasks">0</span> | Concluídas: <span id="completedTasks">0</span></div>
+        <ul id="taskList"></ul>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
