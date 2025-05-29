@@ -4,7 +4,6 @@ require_once "src/Classes/Produto.php";
 //Importação do arquivo Cliente.php
 require_once "src/Classes/Cliente.php";
 
-
 //Instancia do Produto
 $prod1 = new Produto;
 $prod1 -> titulo = "Skol";
@@ -30,3 +29,21 @@ $cli -> telefone = "41-XXXX-XXXX";
 $cli ->comprar($cli);
 echo "<br>";
 var_dump($cli);
+echo "<br>";
+
+$nomeClasse = "produto";
+
+$instancia = new $nomeClasse;
+var_dump($instancia);
+echo "<br>";
+
+$cli2 = new $cli;
+$nomeClasse2 = get_class($cli);
+$cli3 = new $nomeClasse2;
+$cli3 -> nome = "José";
+
+var_dump($cli);
+echo "<br>";
+var_dump($cli2);
+echo "<br>";
+var_dump($cli3);

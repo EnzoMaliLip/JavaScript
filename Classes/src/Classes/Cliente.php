@@ -11,4 +11,8 @@ class Cliente
     {
         echo "O cliente realizou uma compra";
     }
+    public function definirNome($nome)
+    {
+        $this->nome = $nome;
+    }
 }
