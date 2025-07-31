@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Usuários</title>
+  <link rel="stylesheet" href="../../public/style.css" />
+</head>
+<body>
+  <h1>Usuários</h1>
+
+  <form id="form-usuario">
+    <input type="hidden" id="id">
+    <input type="text" id="nome" placeholder="Nome" required />
+    <input type="email" id="email" placeholder="Email" required />
+    <button type="submit">Salvar</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr><th>Nome</th><th>Email</th><th>Ações</th></tr>
+    </thead>
+    <tbody id="tabela-usuarios"></tbody>
+  </table>
+
+  <script>
+    async function carregarUsuarios() {
+      const res = await fetch('../../controllers/UsuarioController.php');
+      const usuarios = await res.json();
+      const tabela = document.getElementById('tabela-usuarios');
+      tabela.innerHTML = '';
+      usuarios.forEach(u => {
+        const linha = `<tr>
+          <td>${u.nome}</td>
+          <td>${u.email}</td>
+          <td>
+            <button onclick="editar(${u.id}, '${u.nome}', '${u.email}')">Editar</button>
+            <button onclick="excluir(${u.id})">Excluir</button>
+          </td>
+        </tr>`;
+        tabela.innerHTML += linha;
+      });
+    }
+
+    function editar(id, nome, email) {
+      document.getElementById('id').value = id;
+      document.getElementById('nome').value = nome;
+      document.getElementById('email').value = email;
+    }
+
+    async function excluir(id) {
+      if (confirm("Deseja excluir este usuário?")) {
+        await fetch('../../controllers/UsuarioController.php', {
+          method: 'DELETE',
+          body: `id=${id}`
+        });
+        carregarUsuarios();
+      }
+    }
+
+    document.getElementById('form-usuario').addEventListener('submit', async e => {
+      e.preventDefault();
+      const id = document.getElementById('id').value;
+      const nome = document.getElementById('nome').value;
+      const email = document.getElementById('email').value;
+
+      await fetch('../../controllers/UsuarioController.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, nome, email })
+      });
+
+      e.target.reset();
+      carregarUsuarios();
+    });
+
+    carregarUsuarios();
+  </script>
+</body>
+</html>

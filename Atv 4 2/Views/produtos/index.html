@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Produtos</title>
+  <link rel="stylesheet" href="../../public/style.css" />
+</head>
+<body>
+  <h1>Produtos</h1>
+
+  <form id="form-produto">
+    <input type="hidden" id="id">
+    <input type="text" id="nome" placeholder="Nome" required />
+    <input type="number" id="preco" placeholder="Preço" required />
+    <button type="submit">Salvar</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr><th>Nome</th><th>Preço</th><th>Ações</th></tr>
+    </thead>
+    <tbody id="tabela-produtos"></tbody>
+  </table>
+
+  <script>
+    async function carregarProdutos() {
+      const res = await fetch('../../controllers/ProdutoController.php');
+      const produtos = await res.json();
+      const tabela = document.getElementById('tabela-produtos');
+      tabela.innerHTML = '';
+      produtos.forEach(p => {
+        const linha = `<tr>
+          <td>${p.nome}</td>
+          <td>R$ ${parseFloat(p.preco).toFixed(2)}</td>
+          <td>
+            <button onclick="editar(${p.id}, '${p.nome}', ${p.preco})">Editar</button>
+            <button onclick="excluir(${p.id})">Excluir</button>
+          </td>
+        </tr>`;
+        tabela.innerHTML += linha;
+      });
+    }
+
+    function editar(id, nome, preco) {
+      document.getElementById('id').value = id;
+      document.getElementById('nome').value = nome;
+      document.getElementById('preco').value = preco;
+    }
+
+    async function excluir(id) {
+      if (confirm("Deseja excluir o produto?")) {
+        await fetch('../../controllers/ProdutoController.php', {
+          method: 'DELETE',
+          body: `id=${id}`
+        });
+        carregarProdutos();
+      }
+    }
+
+    document.getElementById('form-produto').addEventListener('submit', async e => {
+      e.preventDefault();
+      const id = document.getElementById('id').value;
+      const nome = document.getElementById('nome').value;
+      const preco = document.getElementById('preco').value;
+
+      await fetch('../../controllers/ProdutoController.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, nome, preco })
+      });
+
+      e.target.reset();
+      carregarProdutos();
+    });
+
+    carregarProdutos();
+  </script>
+</body>
+</html>
